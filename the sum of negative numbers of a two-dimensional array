@@ -1,0 +1,62 @@
+#include <iostream>
+
+const unsigned int Dim1 = 4;
+const unsigned int Dim2 = 3;
+
+void showMatrix(int* pmatrix[], int d1, int d2)
+{
+    for (int i = 0; i < d1; i++)
+    {
+        for (int g = 0; g < d2; g++)
+        {
+            std::cout << pmatrix[i][g] << "\t";
+        }
+        std::cout << "\n";
+    }
+}
+
+void initMatrix(int* pmatrix[], int d1, int d2)
+{
+    for (int i = 0; i < d1; i++)
+    {
+        for (int g = 0; g < d2; g++)
+        {
+            pmatrix[i][g] = rand() % 15 - 5;
+        }
+    }
+}
+
+void sumNegNum(int* pmatrix[], int d1, int d2)
+{
+    int sum = 0;
+    for (int i = 0; i < d1; i++)
+    {
+        for (int g = 0; g < d2; g++)
+        {
+            if (pmatrix[i][g] < 0)
+            {
+                sum += pmatrix[i][g];
+            }
+        }
+    }
+    std::cout << "\n\nSum of negative numbers = " << sum << std::endl;
+}
+int main()
+{
+    srand(time(NULL));
+
+    int matrix[Dim1][Dim2];
+    int* ptrMatrix[Dim1];
+
+    for (int i = 0; i < Dim1; i++)
+    {
+        ptrMatrix[i] = matrix[i];
+    }
+
+    initMatrix(ptrMatrix, Dim1, Dim2);
+
+    showMatrix(ptrMatrix, Dim1, Dim2);
+
+    sumNegNum(ptrMatrix, Dim1, Dim2);
+
+}
