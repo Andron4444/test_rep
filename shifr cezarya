@@ -1,0 +1,73 @@
+//Шифратор Цезаря
+#include <iostream>
+#include <string>
+#include <map>
+#include <vector>
+
+std::map <char, char> initCript(std::vector <char> vc, std::map <char, char> mp, int Key)
+{
+    for (int i = 192; i <= 255; i++)
+    {
+        vc.push_back(char(i));
+        if (i == 197)
+        {
+            vc.push_back(char(168));
+        }
+        if (i == 229)
+        {
+            vc.push_back(char(184));
+        }
+    }
+
+    int vc_size = vc.size();
+
+    for (int i = 0; i < vc.size(); i++)
+    {
+        int vol = 0;
+        if (i + Key >= vc_size)
+        {
+            vol = i + Key - vc_size;
+        }
+        else
+        {
+            vol += i + Key;
+        }
+        mp[vc[i]] = vc[vol];
+    }
+    return mp;
+}
+
+void showCript(int Key, std::map <char, char> mp, std::string stroka)
+{
+    for (int i = 0; i < stroka.size(); i++)
+    {
+        if (stroka[i] == ' ')
+        {
+            std::cout << ' ';
+        }
+        std::cout << mp[stroka[i]];
+    }
+    std::cout << "\n";
+}
+
+int main()
+{
+    int Key = 28;
+    setlocale(LC_ALL, "rus");
+    std::cout << "программа кодирования фразы шифром цезаря\nнапример:\n";
+    std::string stroka = "Казаков Андрей Алексеевич";
+    std::cout << stroka << "\n";
+    std::map <char, char> mp;
+    std::vector <char> vc;
+    mp = initCript(vc, mp, Key);
+    showCript(Key, mp, stroka);
+
+
+    std::cout << "введите ключ шифрования 13, 6, 28 \n";
+    std::cin >> Key;
+    vc.clear();
+    mp.clear();
+    mp = initCript(vc, mp, Key);
+    std::cout << stroka << "\n";
+    showCript(Key, mp, stroka);
+}
