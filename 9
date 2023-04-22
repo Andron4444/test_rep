@@ -1,0 +1,31 @@
+#include <iostream>
+#include <SFML\Graphics.hpp>
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(640, 480), "SFML");
+    sf::ConvexShape hexagon;
+    hexagon.setPointCount(6);
+    hexagon.setPoint(0, sf::Vector2f(60, 0));
+    hexagon.setPoint(1, sf::Vector2f(0, 40));
+    hexagon.setPoint(2, sf::Vector2f(0, 120));
+    hexagon.setPoint(3, sf::Vector2f(60, 160));
+    hexagon.setPoint(4, sf::Vector2f(120, 120));
+    hexagon.setPoint(5, sf::Vector2f(120, 40));
+    hexagon.setFillColor(sf::Color::Blue);
+    hexagon.setOutlineThickness(5);
+    hexagon.setOutlineColor(sf::Color::Black);
+    hexagon.setPosition(window.getSize().x / 2 - 60, window.getSize().y / 2 - 80);
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear(sf::Color::White);
+        window.draw(hexagon);
+        window.display();
+    
+    return 0;
+}
